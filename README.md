@@ -1,0 +1,4 @@
+mouse
+=====
+
+Mouse - simple game
