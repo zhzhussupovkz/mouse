@@ -9,10 +9,8 @@ class MyWindow < Gosu::Window
     @music.play(looping = true)
 
     @mouse = Mouse.new(self, 520, 375)
-    @x = rand(50..550)
-    @y = rand(100..300)
-    @cheese = Cheese.new(self, @x, @y)
-
+    @level = Level.new(self, 1)
+    @level.start
   end
 
   def update
@@ -24,7 +22,7 @@ class MyWindow < Gosu::Window
   end
 
   def draw
-    @cheese.draw
+    @level.draw
     @mouse.draw
     @bg.draw(0, 0, 0)
   end
