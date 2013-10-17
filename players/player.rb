@@ -8,27 +8,29 @@ class Player
     @face_left = true
   end
 
+  attr_reader :x, :y
+
   #move left
   def move_left
     @face_left = true
     @x -= 5.0
-    @x = 1.0 if @x < 1.0
+    @x = 1.0 if @x <= 1.0
   end
   
   #move right
   def move_right
     @face_left = false
-    @x += 5.0 if @x < 595.0
+    @x += 5.0 if @x <= 595.0
   end
   
   #up
   def up
-    @y -= 7.0 if @y > 17.0
+    @y -= 7.0 if @y >= 17.0
   end
 
   #move down
   def down
-    @y += 2.5 if @y < 372.5
+    @y += 2.5 if @y <= 372.5
   end
   
   #move

@@ -19,6 +19,12 @@ class MyWindow < Gosu::Window
     @mouse.up if button_down? Gosu::KbUp or button_down? Gosu::KbSpace
     @mouse.down
     @mouse.move
+    @level.cheeses.each do |e|
+      if (e.x - @mouse.x).abs <= 15.0 && (e.y - @mouse.y).abs <= 15.0
+        e.drawing = false
+        @mouse.add_score
+      end
+    end
   end
 
   def draw
@@ -28,7 +34,8 @@ class MyWindow < Gosu::Window
   end
 
   def button_down(key)
-    if key == Gosu::KbEscape
+    case key
+    when Gosu::KbEscape
       @music.stop
       close
     end
