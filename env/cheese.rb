@@ -8,7 +8,7 @@ class Cheese
   end
 
   attr_accessor :drawing
-  attr_reader :x, :y
+  attr_accessor :x, :y
 
   #draw cheese
   def draw

@@ -6,10 +6,14 @@ class Mouse < Player
     @score, @lives = 0, 3
     @heart = Gosu::Image.new(window, "images/heart.png", false)
     @ui = Gosu::Font.new(window, 'Monaco', 25)
+    puts "Create mouse..."
+    @on_ground = false
   end
 
-  attr_reader :score, :lives
+  attr_reader :lives, :score
+  attr_accessor :on_ground
 
+  #draw mouse
   def draw
     super
     @ui.draw("Score: #{@score}", 10, 450, 2)
@@ -20,6 +24,12 @@ class Mouse < Player
     end
   end
 
+  #move down
+  def down
+    @y += 2.5 if @y <= 372.5
+  end
+
+  #dead
   def dead
     @lives -= 1
     @lives = 0 if @lives <= 0
@@ -29,6 +39,7 @@ class Mouse < Player
     return @lives == 0
   end
 
+  #add score
   def add_score
     @score += 100
   end
