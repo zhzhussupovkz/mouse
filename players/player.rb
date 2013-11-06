@@ -8,7 +8,21 @@ class Player
     @face_left = true
   end
 
-  attr_reader :x, :y
+  def feet_on? brick
+    feet_x = @x + 20.0
+    feet_y = @y + 36.0
+    feet_x >= brick.x      &&
+    feet_x <= brick.x + 36 &&
+    feet_y >  brick.y      &&
+    feet_y <  brick.y + 48
+  end
+
+  def feet_y= val
+    dy = 2.0
+    @y = val - dy
+  end
+
+  attr_accessor :x, :y
 
   #move left
   def move_left

@@ -8,6 +8,7 @@ class Brick
   end
 
   attr_accessor :x, :y, :drawing
+  attr_reader :width, :height
 
   #draw brick
   def draw

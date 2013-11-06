@@ -19,7 +19,7 @@ class Mouse < Player
     @ui.draw("Score: #{@score}", 10, 450, 2)
     @heart_x = 0
     @lives.times do
-      @heart.draw(600-@heart_x, 450, 2)
+      @heart.draw(600 - @heart_x, 450, 2)
       @heart_x += 24
     end
   end
@@ -42,6 +42,11 @@ class Mouse < Player
   #add score
   def add_score
     @score += 100
+  end
+
+  #reboot mouse
+  def reboot
+    @x, @y, @face_left = 520, 375, true
   end
 
 end

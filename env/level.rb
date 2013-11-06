@@ -52,6 +52,14 @@ class Level
         @mouse.add_score
       end
     end
+    @bricks.each do |e|
+      move_player_on_top e if @mouse.feet_on? e
+    end
+  end
+
+  #move player on top of brick
+  def move_player_on_top brick
+    @mouse.feet_y = brick.y - 36
   end
 
   #max scores in level
@@ -63,6 +71,7 @@ class Level
   def end_level
     @cheeses = []
     @bricks = []
+    @mouse.reboot
   end
 
 end
