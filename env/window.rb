@@ -9,34 +9,17 @@ class MyWindow < Gosu::Window
     @music = Gosu::Song.new(self, 'sounds/music.ogg')
     puts "Create game music..."
     @music.play(looping = true)
-    @mouse = Mouse.new(self, 520, 375)
     @level = Level.new(self)
     @level.start
   end
 
   #game logic
   def update
-    if @mouse.score == @level.total_scores
-      @level.end_level
-      @level.start
-    end
-    @mouse.move_left if button_down? Gosu::KbLeft
-    @mouse.move_right if button_down? Gosu::KbRight
-    @mouse.up if button_down? Gosu::KbUp or button_down? Gosu::KbSpace
-    @mouse.down if @mouse.on_ground == false
-    @mouse.move
-    @level.cheeses.each do |e|
-      if (e.x - @mouse.x).abs <= 15.0 && (e.y - @mouse.y).abs <= 15.0
-        e.drawing = false
-        e.x = e.y = -1
-        @mouse.add_score
-      end
-    end
+    @level.update
   end
 
   def draw
     @level.draw
-    @mouse.draw
     @bg.draw(0, 0, 0)
   end
 

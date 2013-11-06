@@ -3,6 +3,7 @@ class Level
 
   def initialize window
     @window, @num = window, 0
+    @mouse = Mouse.new(@window, 520, 375)
     @cheeses = []
     @bricks = []
     @ui = Gosu::Font.new(@window, 'Monaco', 25)
@@ -29,7 +30,28 @@ class Level
   def draw
     @cheeses.each do |e| e.draw end
     @bricks.each do |e| e.draw end
+    @mouse.draw
     @ui.draw("Level:#{@num}", 10, 425, 2)
+  end
+
+  #update
+  def update
+    if @mouse.score == total_scores
+      end_level
+      start
+    end
+    @mouse.move_left if @window.button_down? Gosu::KbLeft
+    @mouse.move_right if @window.button_down? Gosu::KbRight
+    @mouse.up if @window.button_down? Gosu::KbUp or @window.button_down? Gosu::KbSpace
+    @mouse.down if @mouse.on_ground == false
+    @mouse.move
+    @cheeses.each do |e|
+      if (e.x - @mouse.x).abs <= 15.0 && (e.y - @mouse.y).abs <= 15.0
+        e.drawing = false
+        e.x = e.y = -1
+        @mouse.add_score
+      end
+    end
   end
 
   #max scores in level
