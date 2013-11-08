@@ -1,3 +1,9 @@
+=begin
+/**
+* @author zhzhussupovkz@gmail.com
+* @copyright (c) 2013 Zhussupov Zhassulan zhzhussupovkz@gmail.com
+*/
+=end
 #class Level
 class Level
 
@@ -7,6 +13,7 @@ class Level
     @cheeses = []
     @bricks = []
     @ui = Gosu::Font.new(@window, 'Monaco', 25)
+    @c = Gosu::Font.new(@window, 'Monaco', 15)
     puts "Initialize levels..."
   end
 
@@ -32,6 +39,7 @@ class Level
     @bricks.each do |e| e.draw end
     @mouse.draw
     @ui.draw("Level:#{@num}", 10, 425, 2)
+    @c.draw("Copyright (c) 2013 by zhzhussupovkz", 195, 465, 2)
   end
 
   #update

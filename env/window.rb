@@ -1,3 +1,9 @@
+=begin
+/**
+* @author zhzhussupovkz@gmail.com
+* @copyright (c) 2013 Zhussupov Zhassulan zhzhussupovkz@gmail.com
+*/
+=end
 #main window
 class MyWindow < Gosu::Window
 
