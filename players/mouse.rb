@@ -8,9 +8,9 @@
 class Mouse < Player
 
   def initialize window, x, y
-    super window, x, y, "images/mouse.png", "images/mouse-r.png"
+    super window, x, y, "images/players/mouse.png", "images/players/mouse-r.png"
     @score, @lives = 0, 3
-    @heart = Gosu::Image.new(window, "images/heart.png", false)
+    @heart = Gosu::Image.new(window, "images/players/heart.png", false)
     @ui = Gosu::Font.new(window, 'Monaco', 25)
     puts "Create mouse..."
     @on_ground = false

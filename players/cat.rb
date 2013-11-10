@@ -8,7 +8,7 @@
 class Cat < Player
 
   def initialize window, x, y
-    super window, x, y, "images/cat.png", "images/cat-r.png"
+    super window, x, y, "images/players/cat.png", "images/players/cat-r.png"
     @beep = Gosu::Sample.new(window, "sounds/kitten.wav")
     puts "Create cat..."
   end

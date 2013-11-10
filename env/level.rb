@@ -40,7 +40,7 @@ class Level
     @mouse.draw
     @ui.draw("Level:#{@num}", 10, 425, 2)
     @ui.draw("Level #{@num} complete!", 250, 425, 2) if @mouse.score == total_scores
-    @c.draw("Copyright (c) 2013 by zhzhussupovkz", 195, 465, 2)
+    @c.draw("Copyright (c) 2013 by zhzhussupovkz", 225, 465, 2)
   end
 
   #update

@@ -8,7 +8,7 @@
 class Brick
 
   def initialize window, x, y
-    @image = Gosu::Image.new(window, "images/wall.png", false)
+    @image = Gosu::Image.new(window, "images/level/wall.png", false)
     @x, @y = x, y
     @drawing = true
   end

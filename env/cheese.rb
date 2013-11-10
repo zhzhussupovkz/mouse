@@ -8,7 +8,7 @@
 class Cheese
 
   def initialize window, x, y
-    @image = Gosu::Image.new(window, "images/cheese.png", false)
+    @image = Gosu::Image.new(window, "images/level/cheese.png", false)
     @x, @y = x, y
     @drawing = true
   end
