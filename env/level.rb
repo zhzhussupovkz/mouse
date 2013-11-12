@@ -17,8 +17,8 @@ class Level
     puts "Initialize levels..."
   end
 
-  attr_reader :ui, :num
-  attr_accessor :bricks, :cheeses
+  attr_reader :ui
+  attr_accessor :bricks, :cheeses, :num
 
   #starting level
   def start

@@ -13,18 +13,55 @@ class Menu
     @save = Gosu::Image.new(@window, "images/menu/save.png", false)
     @exit = Gosu::Image.new(@window, "images/menu/exit.png", false)
     @cursor = Gosu::Image.new(@window, 'images/menu/cursor.png')
-    @drawing = true
+    @drawing = false
+    @menu_x, @menu_y, @width = 250, 150, 123
+    @interval = 40
   end
 
   attr_accessor :drawing
 
   def draw
     if drawing
-      @new.draw(250, 150, 2)
-      @save.draw(250,190, 2)
-      @exit.draw(250, 230, 2)
+      @new.draw(@menu_x, @menu_y, 2)
+      @save.draw(@menu_x, @menu_y + @interval, 2)
+      @exit.draw(@menu_x, @menu_y + 2*@interval, 2)
       @cursor.draw(@window.mouse_x, @window.mouse_y, 3)
    end
+  end
+
+  def update
+    if @menu_x < @window.mouse_x &&
+    @window.mouse_x < @menu_x + @width &&
+    @menu_y < @window.mouse_y &&
+    @window.mouse_y < @menu_y + @interval && (@window.button_down? Gosu::MsLeft)
+      new_game
+    elsif @menu_x < @window.mouse_x &&
+    @window.mouse_x < @menu_x + @width &&
+    @menu_y + @interval < @window.mouse_y &&
+    @window.mouse_y < @menu_y + 2*@interval && (@window.button_down? Gosu::MsLeft)
+      save_game
+    elsif @menu_x < @window.mouse_x &&
+    @window.mouse_x < @menu_x + @width &&
+    @menu_y + 2*@interval < @window.mouse_y &&
+    @window.mouse_y < @menu_y + 3*@interval && (@window.button_down? Gosu::MsLeft)
+      exit
+    end
+  end
+
+  #starting new game
+  def new_game
+    @drawing= false
+  end
+
+  #save or load game
+  def save_game
+    @drawing= false
+  end
+
+  #exit from game
+  def exit
+    @drawing= false
+    @window.close
   end
 
 end

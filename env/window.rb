@@ -20,9 +20,12 @@ class MyWindow < Gosu::Window
     @level.start
   end
 
+  attr_reader :level
+
   #game logic
   def update
     @level.update
+    @menu.update
   end
 
   def draw
@@ -37,6 +40,8 @@ class MyWindow < Gosu::Window
       @music.stop
       close
       puts "Exit."
+    when Gosu::KbBackspace
+      @menu.drawing= !@menu.drawing
     end
   end
 

@@ -16,8 +16,8 @@ class Mouse < Player
     @on_ground = false
   end
 
-  attr_reader :lives, :score
-  attr_accessor :on_ground
+  attr_reader :lives
+  attr_accessor :on_ground, :score
 
   #draw mouse
   def draw
