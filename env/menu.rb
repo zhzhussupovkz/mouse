@@ -51,6 +51,11 @@ class Menu
   #starting new game
   def new_game
     @drawing= false
+    puts "Starting new game..."
+    @window.level.num = 0
+    @window.level.mouse.score = 0
+    @window.level.end_level
+    @window.level.start
   end
 
   #save or load game
