@@ -14,10 +14,12 @@ class Db
     @table = 'game'
   end
 
+  attr_reader :db, :table
+
   #save game to db
   def save_game name, score, level
     begin
-      @db.execute "INSERT INTO " + @table + "(name, score, level) VALUES (#{name}, #{score}, #{level})"
+      db.execute "INSERT INTO #{table}(name, score, level) VALUES (#{name}, #{score}, #{level})"
 
     rescue SQLite3::Exception => e
       puts "Database Exception occured"
@@ -32,7 +34,7 @@ class Db
   def load_game
     begin
       id = db.last_insert_row_id
-      stm = @db.prepare "SELECT * FROM " + @table + "WHERE id = #{id}"
+      stm = db.prepare "SELECT * FROM #{table} WHERE id = #{id}"
       rs = stm.execute
 
       row = rs.next
