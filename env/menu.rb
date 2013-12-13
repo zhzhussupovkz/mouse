@@ -66,7 +66,7 @@ class Menu
     score = @window.level.mouse.score
     lvl = @window.level.num
     name = Time.now.strftime("%d/%m/%Y %H:%M")
-    db.save_game name, score, level
+    db.save_game name, score, lvl
   end
 
   #exit from game

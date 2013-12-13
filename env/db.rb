@@ -11,7 +11,7 @@ class Db
 
   def initialize
     @db = SQLite3::Database.open(File.dirname(__FILE__) + "/../db/mouse.db")
-    @table = 'game'
+    @table = 'games'
   end
 
   attr_reader :db, :table
@@ -19,7 +19,7 @@ class Db
   #save game to db
   def save_game name, score, level
     begin
-      db.execute "INSERT INTO #{table}(name, score, level) VALUES (#{name}, #{score}, #{level})"
+      db.execute "INSERT INTO '#{table}' ('name', 'score', 'level') VALUES ('#{name}', '#{score}', '#{level}')"
 
     rescue SQLite3::Exception => e
       puts "Database Exception occured"
@@ -34,7 +34,7 @@ class Db
   def load_game
     begin
       id = db.last_insert_row_id
-      stm = db.prepare "SELECT * FROM #{table} WHERE id = #{id}"
+      stm = db.prepare "SELECT * FROM #{table} WHERE id = '#{id}'"
       rs = stm.execute
 
       row = rs.next
@@ -61,6 +61,11 @@ class Db
     ensure
       db.close if db
     end
+  end
+
+  #close all connections
+  def close
+    db.close if db
   end
 
 end
