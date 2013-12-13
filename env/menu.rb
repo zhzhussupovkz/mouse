@@ -61,6 +61,12 @@ class Menu
   #save or load game
   def save_game
     @drawing= false
+    puts "Save game..."
+    db = Db.new
+    score = @window.level.mouse.score
+    lvl = @window.level.num
+    name = Time.now.strftime("%d/%m/%Y %H:%M")
+    db.save_game name, score, level
   end
 
   #exit from game

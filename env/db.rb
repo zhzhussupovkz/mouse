@@ -49,4 +49,18 @@ class Db
     end
   end
 
+  #delete all games from db
+  def delete_all
+    begin
+      db.execute "TRUNCATE TABLE #{table}"
+
+    rescue SQLite3::Exception => e
+      puts "Database Exception occured"
+      puts e
+    
+    ensure
+      db.close if db
+    end
+  end
+
 end
