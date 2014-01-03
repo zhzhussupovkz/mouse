@@ -8,19 +8,27 @@
 class Cheese
 
   def initialize window, x, y
+    @x, @y, @window = x, y, window
     @image = Gosu::Image.new(window, "images/level/cheese.png", false)
-    @x, @y = x, y
     @drawing = true
   end
 
   attr_accessor :drawing
-  attr_accessor :x, :y
+  attr_accessor :x, :y, :window
 
   #draw cheese
   def draw
     @image.draw(@x, @y, 1) if drawing
     @x %= 640
     @y %= 480
+  end
+
+  #move
+  def move
+    if @drawing
+      @x += 2.0 if window.button_down? Gosu::KbLeft
+      @x -= 2.0 if window.button_down? Gosu::KbRight
+    end
   end
 
 end

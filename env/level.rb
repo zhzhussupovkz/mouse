@@ -23,11 +23,10 @@ class Level
   #starting level
   def start
     @num += 1
-    (2+@num).times do
-      @x_cord = rand(10..550)
-      @y_cord = rand(50..325)
-      @cheeses << Cheese.new(@window, @x_cord, @y_cord)
-      @bricks << Brick.new(@window, @x_cord - 10, @y_cord + 36)
+    (50..550).step(150) do |i|
+      y_cord = rand(50..325)
+      @cheeses << Cheese.new(@window, i, y_cord)
+      @bricks << Brick.new(@window, i - 10, y_cord + 36)
     end
     puts "Starting level #{@num}."
     puts "Go!"
@@ -54,6 +53,8 @@ class Level
     @mouse.up if @window.button_down? Gosu::KbUp or @window.button_down? Gosu::KbSpace
     @mouse.down if @mouse.on_ground == false
     @mouse.move
+    @cheeses.each do |e| e.move end
+    @bricks.each do |e| e.move end
     @cheeses.each do |e|
       if (e.x - @mouse.x).abs <= 15.0 && (e.y - @mouse.y).abs <= 15.0
         e.drawing = false
@@ -73,7 +74,8 @@ class Level
 
   #max scores in level
   def total_scores
-    (2*@num + 0.5 * @num * (@num+1))*100
+    @num * 1000
+    #(2*@num + 0.5 * @num * (@num+1))*100
   end
 
   #end level
