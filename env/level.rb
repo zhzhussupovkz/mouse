@@ -56,14 +56,23 @@ class Level
     @cheeses.each do |e| e.move end
     @bricks.each do |e| e.move end
     @cheeses.each do |e|
-      if (e.x - @mouse.x).abs <= 15.0 && (e.y - @mouse.y).abs <= 15.0
+      if (e.x - @mouse.x).abs <= 15.0 && (e.y - @mouse.y).abs <= 15.0 && e.drawing
         e.drawing = false
-        e.x = e.y = -1
         @mouse.add_score
       end
     end
     @bricks.each do |e|
       move_player_on_top e if @mouse.feet_on? e
+    end
+    redraw if @bricks[3].x >= 640
+  end
+
+  #redraw
+  def redraw
+    @cheeses.each_index do |i|
+      y_cord = rand(50..325)
+      @cheeses[i].y = y_cord
+      @bricks[i].y = y_cord + 36
     end
   end
 
@@ -75,7 +84,6 @@ class Level
   #max scores in level
   def total_scores
     @num * 1000
-    #(2*@num + 0.5 * @num * (@num+1))*100
   end
 
   #end level

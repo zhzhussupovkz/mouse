@@ -13,8 +13,7 @@ class Cheese
     @drawing = true
   end
 
-  attr_accessor :drawing
-  attr_accessor :x, :y, :window
+  attr_accessor :x, :y, :window, :drawing
 
   #draw cheese
   def draw
