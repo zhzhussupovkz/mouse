@@ -33,8 +33,10 @@ class Player
 
   #move left
   def move_left
-    @face_left = true
-    @x -= 5.0
+    if not window.level.pause
+      @face_left = true
+      @x -= 5.0
+    end
   end
   
   #move right
