@@ -42,6 +42,7 @@ class MyWindow < Gosu::Window
       puts "Exit."
     when Gosu::KbBackspace
       @menu.drawing= !@menu.drawing
+      @level.pause= !@level.pause
     end
   end
 

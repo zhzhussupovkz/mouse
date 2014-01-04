@@ -23,12 +23,4 @@ class Brick
     @y %= 480
   end
 
-  #move
-  def move
-    if @drawing
-      @x += 2.0 if window.button_down? Gosu::KbLeft
-      @x -= 2.0 if window.button_down? Gosu::KbRight
-    end
-  end
-
 end

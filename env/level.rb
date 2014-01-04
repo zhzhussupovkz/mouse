@@ -12,13 +12,14 @@ class Level
     @mouse = Mouse.new(@window, 520, 375)
     @cheeses = []
     @bricks = []
+    @pause = false
     @ui = Gosu::Font.new(@window, 'Monaco', 25)
     @c = Gosu::Font.new(@window, 'Monaco', 15)
     puts "Initialize levels..."
   end
 
   attr_reader :ui, :mouse
-  attr_accessor :bricks, :cheeses, :num
+  attr_accessor :bricks, :cheeses, :num, :pause
 
   #starting level
   def start
@@ -53,8 +54,6 @@ class Level
     @mouse.up if @window.button_down? Gosu::KbUp or @window.button_down? Gosu::KbSpace
     @mouse.down if @mouse.on_ground == false
     @mouse.move
-    @cheeses.each do |e| e.move end
-    @bricks.each do |e| e.move end
     @cheeses.each do |e|
       if (e.x - @mouse.x).abs <= 15.0 && (e.y - @mouse.y).abs <= 15.0 && e.drawing
         e.drawing = false
@@ -64,7 +63,7 @@ class Level
     @bricks.each do |e|
       move_player_on_top e if @mouse.feet_on? e
     end
-    redraw if @bricks[3].x >= 640
+    redraw if @mouse.x <= 1
   end
 
   #redraw
@@ -72,6 +71,7 @@ class Level
     @cheeses.each_index do |i|
       y_cord = rand(50..325)
       @cheeses[i].y = y_cord
+      @cheeses[i].drawing = true
       @bricks[i].y = y_cord + 36
     end
   end

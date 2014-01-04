@@ -8,11 +8,14 @@
 class Player
 
   def initialize window, x, y, left, right
-    @x, @y = x, y
+    @window, @x, @y = window, x, y
     @left = Gosu::Image.new(window, left, false)
     @right = Gosu::Image.new(window, right, false)
     @face_left = true
   end
+
+  attr_reader :window
+  attr_accessor :x, :y
 
   def feet_on? brick
     feet_x = @x + 20.0
@@ -28,29 +31,28 @@ class Player
     @y = val - dy
   end
 
-  attr_accessor :x, :y
-
   #move left
   def move_left
     @face_left = true
     @x -= 5.0
-    @x = 1.0 if @x <= 1.0
   end
   
   #move right
   def move_right
-    @face_left = false
-    @x += 5.0 if @x <= 595.0
+    if not window.level.pause
+      @face_left = false
+      @x += 5.0 if @x <= 595.0
+    end
   end
   
   #up
   def up
-    @y -= 7.0 if @y >= 17.0
+    @y -= 7.0 if @y >= 17.0 && (not window.level.pause)
   end
 
   #move down
   def down
-    @y += 2.5 if @y <= 372.5
+    @y += 2.5 if @y <= 372.5 && (not window.level.pause)
   end
   
   #move
