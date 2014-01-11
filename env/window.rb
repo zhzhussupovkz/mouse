@@ -20,7 +20,7 @@ class MyWindow < Gosu::Window
     @level.start
   end
 
-  attr_reader :level
+  attr_reader :level, :music
 
   #game logic
   def update
