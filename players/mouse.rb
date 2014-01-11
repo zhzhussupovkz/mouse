@@ -38,11 +38,6 @@ class Mouse < Player
     end
   end
 
-  #move down
-  def down
-    @y += 2.5 if @y <= 372.5
-  end
-
   #dead
   def dead
     @lives -= 1

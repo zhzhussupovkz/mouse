@@ -49,12 +49,12 @@ class Player
   
   #up
   def up
-    @y -= 7.0 if @y >= 17.0 && (not window.level.pause)
+    @y -= 20.0 if @y >= 17.0 && (not window.level.pause)
   end
 
   #move down
   def down
-    @y += 2.5 if @y <= 372.5 && (not window.level.pause)
+    @y += 7.0 if @y <= 372.5 && (not window.level.pause)
   end
   
   #move

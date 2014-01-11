@@ -14,10 +14,8 @@ class Level
       @cheeses = []
       @bricks = []
       @pause = false
-      @ct = Time.now.to_i
       @ui = Gosu::Font.new(@window, 'Monaco', 25)
       @c = Gosu::Font.new(@window, 'Monaco', 15)
-      @collect = Gosu::Song.new(window, 'sounds/collect.ogg')
       puts "Initialize levels..."
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
@@ -73,13 +71,9 @@ class Level
       @cheeses.each do |e|
         if (e.x - @mouse.x).abs <= 15.0 && (e.y - @mouse.y).abs <= 15.0 && e.drawing
           e.drawing = false
-          window.music.pause
-          @ct = Time.now.to_i
-          @collect.play(looping = false)
           @mouse.add_score
         end
       end
-      window.music.play if Time.now.to_i >= @ct + 1.2
       @bricks.each do |e|
         move_player_on_top e if @mouse.feet_on? e
       end
