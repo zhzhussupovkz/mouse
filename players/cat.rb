@@ -8,8 +8,12 @@
 class Cat < Player
 
   def initialize window, x, y
-    super window, x, y, "images/players/cat.png", "images/players/cat-r.png"
-    @beep = Gosu::Sample.new(window, "sounds/kitten.wav")
+    begin
+      super window, x, y, "images/players/cat.png", "images/players/cat-r.png"
+      @beep = Gosu::Sample.new(window, "sounds/kitten.wav")
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
     puts "Create cat..."
   end
 
@@ -17,7 +21,11 @@ class Cat < Player
 
   #cat say meow
   def meow
-    @beep.play
+    begin
+      @beep.play
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
 end

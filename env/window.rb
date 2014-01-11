@@ -8,30 +8,42 @@
 class MyWindow < Gosu::Window
 
   def initialize
-    puts "Start environment..."
-    super 640, 480, false
-    self.caption = 'Mouse Game'
-    @bg = Gosu::Image.new(self, 'images/level/bg.png', true);
-    @music = Gosu::Song.new(self, 'sounds/music.ogg')
-    puts "Create game music..."
-    @music.play(looping = true)
-    @menu = Menu.new(self)
-    @level = Level.new(self)
-    @level.start
+    begin
+      puts "Start environment..."
+      super 640, 480, false
+      self.caption = 'Mouse Game'
+      @bg = Gosu::Image.new(self, 'images/level/bg.png', true);
+      @music = Gosu::Song.new(self, 'sounds/music.ogg')
+      puts "Create game music..."
+      @music.play(looping = true)
+      @menu = Menu.new(self)
+      @level = Level.new(self)
+      @level.start
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   attr_reader :level, :music
 
   #game logic
   def update
-    @level.update
-    @menu.update
+    begin
+      @level.update
+      @menu.update
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   def draw
-    @level.draw
-    @menu.draw
-    @bg.draw(0, 0, 0)
+    begin
+      @level.draw
+      @menu.draw
+      @bg.draw(0, 0, 0)
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   def button_down(key)

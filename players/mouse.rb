@@ -8,12 +8,16 @@
 class Mouse < Player
 
   def initialize window, x, y
-    super window, x, y, "images/players/mouse.png", "images/players/mouse-r.png"
-    @score, @lives = 0, 3
-    @heart = Gosu::Image.new(window, "images/players/heart.png", false)
-    @ui = Gosu::Font.new(window, 'Monaco', 25)
-    puts "Create mouse..."
-    @on_ground = false
+    begin
+      super window, x, y, "images/players/mouse.png", "images/players/mouse-r.png"
+      @score, @lives = 0, 3
+      @heart = Gosu::Image.new(window, "images/players/heart.png", false)
+      @ui = Gosu::Font.new(window, 'Monaco', 25)
+      puts "Create mouse..."
+      @on_ground = false
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   attr_reader :lives
@@ -21,12 +25,16 @@ class Mouse < Player
 
   #draw mouse
   def draw
-    super
-    @ui.draw("Score: #{@score}", 10, 450, 2)
-    @heart_x = 0
-    @lives.times do
-      @heart.draw(600 - @heart_x, 450, 2)
-      @heart_x += 24
+    begin
+      super
+      @ui.draw("Score: #{@score}", 10, 450, 2)
+      @heart_x = 0
+      @lives.times do
+        @heart.draw(600 - @heart_x, 450, 2)
+        @heart_x += 24
+      end
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
     end
   end
 

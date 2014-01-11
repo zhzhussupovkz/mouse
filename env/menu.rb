@@ -8,43 +8,55 @@
 class Menu
 
   def initialize window
-    @window = window
-    @new = Gosu::Image.new(@window, "images/menu/new.png", false)
-    @save = Gosu::Image.new(@window, "images/menu/save.png", false)
-    @exit = Gosu::Image.new(@window, "images/menu/exit.png", false)
-    @cursor = Gosu::Image.new(@window, 'images/menu/cursor.png')
-    @drawing = false
-    @menu_x, @menu_y, @width = 250, 150, 123
-    @interval = 40
+    begin
+      @window = window
+      @new = Gosu::Image.new(@window, "images/menu/new.png", false)
+      @save = Gosu::Image.new(@window, "images/menu/save.png", false)
+      @exit = Gosu::Image.new(@window, "images/menu/exit.png", false)
+      @cursor = Gosu::Image.new(@window, 'images/menu/cursor.png')
+      @drawing = false
+      @menu_x, @menu_y, @width = 250, 150, 123
+      @interval = 40
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   attr_accessor :drawing
 
   def draw
-    if drawing
-      @new.draw(@menu_x, @menu_y, 2)
-      @save.draw(@menu_x, @menu_y + @interval, 2)
-      @exit.draw(@menu_x, @menu_y + 2*@interval, 2)
-      @cursor.draw(@window.mouse_x, @window.mouse_y, 3)
-   end
+    begin
+      if drawing
+        @new.draw(@menu_x, @menu_y, 2)
+        @save.draw(@menu_x, @menu_y + @interval, 2)
+        @exit.draw(@menu_x, @menu_y + 2*@interval, 2)
+        @cursor.draw(@window.mouse_x, @window.mouse_y, 3)
+      end
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
+    end
   end
 
   def update
-    if @menu_x < @window.mouse_x &&
-    @window.mouse_x < @menu_x + @width &&
-    @menu_y < @window.mouse_y &&
-    @window.mouse_y < @menu_y + @interval && (@window.button_down? Gosu::MsLeft)
-      new_game
-    elsif @menu_x < @window.mouse_x &&
-    @window.mouse_x < @menu_x + @width &&
-    @menu_y + @interval < @window.mouse_y &&
-    @window.mouse_y < @menu_y + 2*@interval && (@window.button_down? Gosu::MsLeft)
-      save_game
-    elsif @menu_x < @window.mouse_x &&
-    @window.mouse_x < @menu_x + @width &&
-    @menu_y + 2*@interval < @window.mouse_y &&
-    @window.mouse_y < @menu_y + 3*@interval && (@window.button_down? Gosu::MsLeft)
-      exit
+    begin
+      if @menu_x < @window.mouse_x &&
+      @window.mouse_x < @menu_x + @width &&
+      @menu_y < @window.mouse_y &&
+      @window.mouse_y < @menu_y + @interval && (@window.button_down? Gosu::MsLeft)
+        new_game
+      elsif @menu_x < @window.mouse_x &&
+      @window.mouse_x < @menu_x + @width &&
+      @menu_y + @interval < @window.mouse_y &&
+      @window.mouse_y < @menu_y + 2*@interval && (@window.button_down? Gosu::MsLeft)
+        save_game
+      elsif @menu_x < @window.mouse_x &&
+      @window.mouse_x < @menu_x + @width &&
+      @menu_y + 2*@interval < @window.mouse_y &&
+      @window.mouse_y < @menu_y + 3*@interval && (@window.button_down? Gosu::MsLeft)
+        exit
+      end
+    rescue Exception => e
+      puts "#{e.class}: #{e.message}"
     end
   end
 
