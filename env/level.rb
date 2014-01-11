@@ -11,6 +11,7 @@ class Level
     begin
       @window, @num = window, 0
       @mouse = Mouse.new(@window, 520, 375)
+      @cat = Cat.new(@window, 5, 375)
       @cheeses = []
       @bricks = []
       @pause = false
@@ -47,6 +48,7 @@ class Level
       @cheeses.each do |e| e.draw end
       @bricks.each do |e| e.draw end
       @mouse.draw
+      @cat.draw
       @ui.draw("Level:#{@num}", 10, 425, 2)
       @ui.draw("Level #{@num} complete!", 250, 425, 2) if @mouse.score == total_scores
       year = (Time.at(Time.now.to_i)).strftime("%Y")
@@ -63,6 +65,7 @@ class Level
         end_level
         start
       end
+      @cat.update
       @mouse.move_left if @window.button_down? Gosu::KbLeft
       @mouse.move_right if @window.button_down? Gosu::KbRight
       @mouse.up if @window.button_down? Gosu::KbUp or @window.button_down? Gosu::KbSpace
