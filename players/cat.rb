@@ -37,19 +37,13 @@ class Cat < Player
 
   #some artificial intelligence for cat
   def ai
-    time = rand(@time + 1..@time + 5)
-    if time == Time.now.to_i
-      where = ['left', 'right', 'up'].sample
-      case where
-      when 'left'
-        move_left
-      when 'right'
-        move_right
-      when 'up'
-        up
-      end
+    mx = window.level.mouse.x
+    my = window.level.mouse.y
+    if @x < mx
+      move_right
+    elsif @x > mx
+      move_left
     end
-    @time = Time.now.to_i if Time.now.to_i == time + 1
   end
 
   #update
