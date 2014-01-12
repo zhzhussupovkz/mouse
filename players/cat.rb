@@ -39,10 +39,16 @@ class Cat < Player
   def ai
     mx = window.level.mouse.x
     my = window.level.mouse.y
-    if @x < mx
+    if @x + 35.0 < mx
       move_right
-    elsif @x > mx
+      if @y >= my + 15.0
+        up
+      end
+    elsif @x > mx + 35.0
       move_left
+      if @y >= my + 15.0
+        up
+      end
     end
   end
 
