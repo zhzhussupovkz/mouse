@@ -78,7 +78,8 @@ class Level
         end
       end
       @bricks.each do |e|
-        move_player_on_top e if @mouse.feet_on? e
+        move_player_on_top @mouse, e if @mouse.feet_on? e
+        move_player_on_top @cat, e if @cat.feet_on? e
       end
       redraw if @mouse.x <= 1
     rescue Exception => e
@@ -97,8 +98,8 @@ class Level
   end
 
   #move player on top of brick
-  def move_player_on_top brick
-    @mouse.feet_y = brick.y - 36
+  def move_player_on_top player, brick
+    player.feet_y = brick.y - 36
   end
 
   #max scores in level
