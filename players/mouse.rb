@@ -14,14 +14,14 @@ class Mouse < Player
       @heart = Gosu::Image.new(window, "images/players/heart.png", false)
       @ui = Gosu::Font.new(window, 'Monaco', 25)
       puts "Create mouse..."
-      @on_ground = false
+      @on_ground = @injured = false
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
     end
   end
 
   attr_reader :lives
-  attr_accessor :on_ground, :score
+  attr_accessor :on_ground, :score, :injured
 
   #draw mouse
   def draw
@@ -40,7 +40,9 @@ class Mouse < Player
 
   #dead
   def dead
-    @lives -= 1
+    @injured = true
+    @lives -= 1 if @injured
+    @injured = false
     @lives = 0 if @lives <= 0
   end
 
@@ -55,7 +57,7 @@ class Mouse < Player
 
   #reboot mouse
   def reboot
-    @x, @y, @face_left = 520, 375, true
+    @x, @y, @face_left, @injured = 520, 375, true, false
   end
 
 end

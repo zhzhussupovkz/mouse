@@ -81,6 +81,10 @@ class Level
         move_player_on_top @mouse, e if @mouse.feet_on? e
         move_player_on_top @cat, e if @cat.feet_on? e
       end
+      if (@cat.x - @mouse.x).abs <= 15.0 && (@cat.y - @mouse.y).abs <= 15.0
+        @mouse.dead
+        @mouse.reboot
+      end
       redraw if @mouse.x <= 1
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
