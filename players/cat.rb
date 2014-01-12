@@ -11,7 +11,6 @@ class Cat < Player
     begin
       super window, x, y, "images/players/cat.png", "images/players/cat-r.png"
       @face_left, @time = false, Time.now.to_i
-      @beep = Gosu::Sample.new(window, "sounds/kitten.ogg")
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
     end
@@ -19,15 +18,6 @@ class Cat < Player
   end
 
   attr_writer :x, :y
-
-  #cat say meow
-  def meow
-    begin
-      @beep.play
-    rescue Exception => e
-      puts "#{e.class}: #{e.message}"
-    end
-  end
 
   #move left
   def move_left
