@@ -10,11 +10,11 @@ class Level
   def initialize window
     begin
       @window, @num = window, 0
-      @mouse = Mouse.new(@window, 520, 375)
-      @cat = Cat.new(@window, 5, 375)
+      @mouse = Mouse.new(@window, 520, 385)
+      @cat = Cat.new(@window, 5, 385)
       @cheeses = []
       @bricks = []
-      @pause = false
+      @pause = @game_over = false
       @ui = Gosu::Font.new(@window, 'Monaco', 25)
       @c = Gosu::Font.new(@window, 'Monaco', 15)
       puts "Initialize levels..."
@@ -24,7 +24,7 @@ class Level
   end
 
   attr_reader :ui, :mouse, :window
-  attr_accessor :bricks, :cheeses, :num, :pause
+  attr_accessor :bricks, :cheeses, :num, :pause, :game_over
 
   #starting level
   def start
@@ -85,7 +85,7 @@ class Level
         @mouse.dead
         @mouse.reboot
       end
-      redraw if @mouse.x <= 1
+      redraw if @mouse.x <= 0 && (window.button_down? Gosu::KbLeft)
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
     end

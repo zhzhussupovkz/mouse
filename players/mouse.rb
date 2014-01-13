@@ -57,7 +57,12 @@ class Mouse < Player
 
   #reboot mouse
   def reboot
-    @x, @y, @face_left, @injured = 520, 375, true, false
+    @x, @y, @face_left, @injured = 520, 385, true, false
+  end
+
+  #game over
+  def game_over
+    window.level.game_over = true if dead?
   end
 
 end

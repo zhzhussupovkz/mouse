@@ -29,8 +29,10 @@ class MyWindow < Gosu::Window
   #game logic
   def update
     begin
-      @level.update
-      @menu.update
+      if not @level.game_over
+        @level.update
+        @menu.update
+      end
     rescue Exception => e
       puts "#{e.class}: #{e.message}"
     end
