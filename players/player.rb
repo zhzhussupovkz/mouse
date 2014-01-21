@@ -8,7 +8,7 @@
 class Player
 
   def initialize window, x, y, left, right
-    @window, @x, @y, @angle = window, x, y, 0
+    @window, @x, @y = window, x, y
     @left = Gosu::Image.new(window, left, false)
     @right = Gosu::Image.new(window, right, false)
     @face_left = true
@@ -54,7 +54,7 @@ class Player
 
   #move down
   def down
-    @y += 7.0 if @y <= 382.5 && (not window.level.pause)
+    @y += 7.0 if @y <= 372.5 && (not window.level.pause)
   end
   
   #move
@@ -66,9 +66,9 @@ class Player
   #draw
   def draw
     if @face_left
-      @left.draw_rot(@x, @y, 1, @angle)
+      @left.draw(@x, @y, 1)
     else
-      @right.draw_rot(@x, @y, 1, @angle)
+      @right.draw(@x, @y, 1)
     end
   end
 

@@ -10,8 +10,8 @@ class Level
   def initialize window
     begin
       @window, @num = window, 0
-      @mouse = Mouse.new(@window, 520, 385)
-      @cat = Cat.new(@window, 5, 385)
+      @mouse = Mouse.new(@window, 520, 375)
+      @cat = Cat.new(@window, 5, 375)
       @cheeses = []
       @bricks = []
       @pause = @game_over = false
